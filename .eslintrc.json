@@ -1,6 +1,6 @@
 {
     "extends": ["airbnb", "prettier"],
-    "plugins": ["prettier"],
+    "plugins": ["prettier", "jest"],
     "rules":{
         "no-unused-vars":"warn"
     }

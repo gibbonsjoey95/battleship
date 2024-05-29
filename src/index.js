@@ -1,11 +1,14 @@
 import './styles.css';
+import Ship from './ship.js';
 
 function component() {
   const element = document.createElement('div');
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  let ship = new Ship(3);
 
+  console.log('ship', ship);
+  ship.hit();
+  console.log('2', ship);
   return element;
 }
 
