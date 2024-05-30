@@ -110,13 +110,23 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/gameboard.js":
+/*!**************************!*\
+  !*** ./src/gameboard.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _ship__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\n\nclass Gameboard {\n  constructor() {\n    this.grid = this.createGrid();\n    this.ships = [];\n  }\n\n  createGrid(size = 10) {\n    return Array.from({ length: size }, () => Array(size).fill(null));\n  }\n\n  placeShip(ship, x, y, direction) {\n    if (direction == 'horizontal') {\n      for (let i = 0; i < ship.length; i++) {\n        this.grid[x][y + i] = ship;\n      }\n    } else if (direction == 'vertical') {\n      for (let i = 0; i < ship.length; i++) {\n        this.grid[x + i][y] = ship;\n      }\n    }\n    this.ships.push(ship);\n  }\n\n  receiveAttack(x, y) {\n    const cell = this.grid[x][y];\n    if (cell && cell !== 'hit' && cell !== 'miss') {\n      cell.hit();\n      console.log(this.ships);\n      this.grid[x][y] = 'hit';\n    } else {\n      this.grid[x][y] = 'miss';\n    }\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Gameboard);\n\n\n//# sourceURL=webpack://template/./src/gameboard.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* harmony import */ var _ship_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ship.js */ \"./src/ship.js\");\n\n\n\nfunction component() {\n  const element = document.createElement('div');\n\n  let ship = new _ship_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"](3);\n\n  console.log('ship', ship);\n  ship.hit();\n  console.log('2', ship);\n  return element;\n}\n\ndocument.body.appendChild(component());\n\n\n//# sourceURL=webpack://template/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* harmony import */ var _ship__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n/* harmony import */ var _gameboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gameboard */ \"./src/gameboard.js\");\n\n\n\n\nfunction component() {\n  const element = document.createElement('div');\n\n  let ship = new _ship__WEBPACK_IMPORTED_MODULE_1__[\"default\"](3);\n  let gameboard = new _gameboard__WEBPACK_IMPORTED_MODULE_2__[\"default\"]();\n  gameboard.placeShip(ship, 0, 0, 'horizontal');\n\n  gameboard.receiveAttack(0, 0);\n  gameboard.receiveAttack(0, 3);\n\n  console.log('gameboard', gameboard);\n\n  return element;\n}\n\ndocument.body.appendChild(component());\n\n\n//# sourceURL=webpack://template/./src/index.js?");
 
 /***/ }),
 
