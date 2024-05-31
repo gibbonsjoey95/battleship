@@ -10,7 +10,21 @@ class Player {
   }
 
   takeTurn(opponent, x, y) {
-    opponent.gameboard.receiveAttack(x, y);
+    if (this.type == 'real') {
+      opponent.gameboard.receiveAttack(x, y);
+    } else {
+      return this.randomAttack(opponent.gameboard);
+    }
+  }
+
+  randomAttack(opponent) {
+    let x, y;
+    do {
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * 10);
+    } while (opponent.grid[x][y] === 'hit' || opponent.grid[x][y] === 'miss');
+
+    return opponent.receiveAttack(x, y);
   }
 }
 
