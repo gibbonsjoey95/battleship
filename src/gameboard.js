@@ -27,7 +27,6 @@ class Gameboard {
     const cell = this.grid[x][y];
     if (cell && cell !== 'hit' && cell !== 'miss') {
       cell.hit();
-      console.log(this.ships);
       this.grid[x][y] = 'hit';
     } else {
       this.grid[x][y] = 'miss';

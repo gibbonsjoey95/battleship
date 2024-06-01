@@ -1,3 +1,30 @@
-.hello {
-    color: red;
+.game-container {
+    width:  650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gameboard-container {
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1px;
+}
+
+.grid-square {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hit {
+    background-color: green;
+}
+
+.miss {
+    background-color: red;
 }
