@@ -37,24 +37,46 @@ function component() {
       gridSquare.dataset.cell = cellIndex;
 
       gridSquare.addEventListener('click', () => {
-        player.takeTurn(opponent, rowIndex, cellIndex);
-        opponent.takeTurn(player, 0, 0);
+        if (
+          opponent.gameboard.grid[rowIndex][cellIndex] === 'hit' ||
+          opponent.gameboard.grid[rowIndex][cellIndex] === 'miss'
+        ) {
+          alert('choose another');
+        } else {
+          player.takeTurn(opponent, rowIndex, cellIndex);
 
-        if (opponent.gameboard.grid[rowIndex][cellIndex] === 'hit') {
-          gridSquare.classList.add('hit');
-        } else if (opponent.gameboard.grid[rowIndex][cellIndex] === 'miss') {
-          gridSquare.classList.add('miss');
+          if (opponent.gameboard.grid[rowIndex][cellIndex] === 'hit') {
+            gridSquare.classList.add('hit');
+          } else if (opponent.gameboard.grid[rowIndex][cellIndex] === 'miss') {
+            gridSquare.classList.add('miss');
+          }
+
+          opponent.takeTurn(player, 0, 0);
+          updatePlayerGameboard();
+
+          console.log(`clicked ${rowIndex},${cellIndex}`, player.gameboard);
         }
-
-        console.log(
-          `clicked ${rowIndex},${cellIndex}`,
-          opponent.gameboard.grid[rowIndex][cellIndex],
-        );
       });
 
       player2Gameboard.appendChild(gridSquare);
     });
   });
+
+  const updatePlayerGameboard = () => {
+    player.gameboard.grid.forEach((row, rowIndex) => {
+      row.forEach((cell, cellIndex) => {
+        const gridSquare = player1Gameboard.querySelector(
+          `[data-row='${rowIndex}'][data-cell='${cellIndex}']`,
+        );
+
+        if (cell === 'hit') {
+          gridSquare.classList.add('hit');
+        } else if (cell === 'miss') {
+          gridSquare.classList.add('miss');
+        }
+      });
+    });
+  };
 }
 
 // document.body.appendChild(component());
