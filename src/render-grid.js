@@ -1,3 +1,4 @@
+import checkEndGame from './check-end-game';
 import handlePlayerTurn from './handle-player-turn';
 
 const renderGrid = (
@@ -18,6 +19,7 @@ const renderGrid = (
       if (isOpponent) {
         gridSquare.addEventListener('click', () => {
           handlePlayerTurn(player, opponent, rowIndex, cellIndex, gridSquare);
+          checkEndGame(player, opponent);
         });
       }
 

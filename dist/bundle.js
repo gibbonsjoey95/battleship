@@ -110,6 +110,16 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/check-end-game.js":
+/*!*******************************!*\
+  !*** ./src/check-end-game.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst checkEndGame = (player, opponent) => {\n  if (player.gameboard.allShipsSunk()) {\n    alert('Opponent won');\n  } else if (opponent.gameboard.allShipsSunk()) {\n    alert('You won!');\n  }\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (checkEndGame);\n\n\n//# sourceURL=webpack://template/./src/check-end-game.js?");
+
+/***/ }),
+
 /***/ "./src/game-controller.js":
 /*!********************************!*\
   !*** ./src/game-controller.js ***!
@@ -166,7 +176,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _handle_player_turn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handle-player-turn */ \"./src/handle-player-turn.js\");\n\n\nconst renderGrid = (\n  gameboard,\n  player,\n  opponent,\n  container,\n  isOpponent = false,\n) => {\n  gameboard.grid.forEach((row, rowIndex) => {\n    row.forEach((cell, cellIndex) => {\n      const gridSquare = document.createElement('div');\n      gridSquare.classList.add('grid-square');\n      gridSquare.textContent = '';\n      gridSquare.dataset.row = rowIndex;\n      gridSquare.dataset.cell = cellIndex;\n\n      if (isOpponent) {\n        gridSquare.addEventListener('click', () => {\n          (0,_handle_player_turn__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(player, opponent, rowIndex, cellIndex, gridSquare);\n\n          //   const square = opponent.gameboard.grid[rowIndex][cellIndex];\n          //   if (square === 'hit' || square === 'miss') {\n          //     alert('choose another square');\n          //   } else {\n          //     player.takeTurn(opponent, rowIndex, cellIndex);\n          //     const updatedSquare = opponent.gameboard.grid[rowIndex][cellIndex];\n\n          //     if (updatedSquare === 'hit') {\n          //       gridSquare.classList.add('hit');\n          //     } else if (updatedSquare === 'miss') {\n          //       gridSquare.classList.add('miss');\n          //     }\n\n          //     opponent.takeTurn(player, 0, 0);\n          //     updatePlayerGameboard(player);\n          //   }\n        });\n      }\n\n      container.appendChild(gridSquare);\n    });\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderGrid);\n\n\n//# sourceURL=webpack://template/./src/render-grid.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _check_end_game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./check-end-game */ \"./src/check-end-game.js\");\n/* harmony import */ var _handle_player_turn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handle-player-turn */ \"./src/handle-player-turn.js\");\n\n\n\nconst renderGrid = (\n  gameboard,\n  player,\n  opponent,\n  container,\n  isOpponent = false,\n) => {\n  gameboard.grid.forEach((row, rowIndex) => {\n    row.forEach((cell, cellIndex) => {\n      const gridSquare = document.createElement('div');\n      gridSquare.classList.add('grid-square');\n      gridSquare.textContent = '';\n      gridSquare.dataset.row = rowIndex;\n      gridSquare.dataset.cell = cellIndex;\n\n      if (isOpponent) {\n        gridSquare.addEventListener('click', () => {\n          (0,_handle_player_turn__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(player, opponent, rowIndex, cellIndex, gridSquare);\n          (0,_check_end_game__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(player, opponent);\n        });\n      }\n\n      container.appendChild(gridSquare);\n    });\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderGrid);\n\n\n//# sourceURL=webpack://template/./src/render-grid.js?");
 
 /***/ }),
 
