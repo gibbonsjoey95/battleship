@@ -5,5 +5,4 @@ function component() {
   gameController();
 }
 
-// document.body.appendChild(component());
 component();

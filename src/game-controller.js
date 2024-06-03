@@ -1,5 +1,6 @@
 import Ship from './ship';
 import Player from './player';
+import updatePlayerGameboard from './update-player-gameboard';
 
 const player1Gameboard = document.querySelector('#player1Gameboard');
 const player2Gameboard = document.querySelector('#player2Gameboard');
@@ -37,28 +38,12 @@ const renderGrid = (gameboard, container, isOpponent = false) => {
             }
 
             opponent.takeTurn(player, 0, 0);
-            updatePlayerGameboard();
+            updatePlayerGameboard(player);
           }
         });
       }
 
       container.appendChild(gridSquare);
-    });
-  });
-};
-
-const updatePlayerGameboard = () => {
-  player.gameboard.grid.forEach((row, rowIndex) => {
-    row.forEach((cell, cellIndex) => {
-      const gridSquare = player1Gameboard.querySelector(
-        `[data-row='${rowIndex}'][data-cell='${cellIndex}']`,
-      );
-
-      if (cell === 'hit') {
-        gridSquare.classList.add('hit');
-      } else if (cell === 'miss') {
-        gridSquare.classList.add('miss');
-      }
     });
   });
 };
