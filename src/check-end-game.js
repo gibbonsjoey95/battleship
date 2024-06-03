@@ -1,8 +1,16 @@
+import startNewGame from './start-new-game';
+
 const checkEndGame = (player, opponent) => {
   if (player.gameboard.allShipsSunk()) {
-    alert('Opponent won');
+    setTimeout(() => {
+      alert('Opponent won');
+      startNewGame(player, opponent);
+    }, 100);
   } else if (opponent.gameboard.allShipsSunk()) {
-    alert('You won!');
+    setTimeout(() => {
+      alert('You won!');
+      startNewGame(player, opponent);
+    }, 100);
   }
 };
 

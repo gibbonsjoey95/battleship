@@ -8,6 +8,7 @@ const renderGrid = (
   container,
   isOpponent = false,
 ) => {
+  container.textContent = '';
   gameboard.grid.forEach((row, rowIndex) => {
     row.forEach((cell, cellIndex) => {
       const gridSquare = document.createElement('div');
