@@ -4,8 +4,16 @@ import Player from './player';
 const player1Gameboard = document.querySelector('#player1Gameboard');
 const player2Gameboard = document.querySelector('#player2Gameboard');
 
-const renderGrid = (player, opponent) => {
-  player.gameboard.grid.forEach((row, rowIndex) => {
+const player = new Player('real');
+const opponent = new Player('computer');
+const ship1 = new Ship(3);
+const ship2 = new Ship(3);
+
+player.gameboard.placeShip(ship1, 0, 0, 'horizontal');
+opponent.gameboard.placeShip(ship2, 0, 0, 'vertical');
+
+const renderGrid = (gameboard, container, isOpponent = false) => {
+  gameboard.grid.forEach((row, rowIndex) => {
     row.forEach((cell, cellIndex) => {
       const gridSquare = document.createElement('div');
       gridSquare.classList.add('grid-square');
@@ -13,44 +21,33 @@ const renderGrid = (player, opponent) => {
       gridSquare.dataset.row = rowIndex;
       gridSquare.dataset.cell = cellIndex;
 
-      player1Gameboard.appendChild(gridSquare);
-    });
-  });
+      if (isOpponent) {
+        gridSquare.addEventListener('click', () => {
+          const square = opponent.gameboard.grid[rowIndex][cellIndex];
+          if (square === 'hit' || square === 'miss') {
+            alert('choose another square');
+          } else {
+            player.takeTurn(opponent, rowIndex, cellIndex);
+            const updatedSquare = opponent.gameboard.grid[rowIndex][cellIndex];
 
-  opponent.gameboard.grid.forEach((row, rowIndex) => {
-    row.forEach((cell, cellIndex) => {
-      const gridSquare = document.createElement('div');
-      gridSquare.classList.add('grid-square');
-      gridSquare.textContent = '';
-      gridSquare.dataset.row = rowIndex;
-      gridSquare.dataset.cell = cellIndex;
+            if (updatedSquare === 'hit') {
+              gridSquare.classList.add('hit');
+            } else if (updatedSquare === 'miss') {
+              gridSquare.classList.add('miss');
+            }
 
-      gridSquare.addEventListener('click', () => {
-        if (
-          opponent.gameboard.grid[rowIndex][cellIndex] === 'hit' ||
-          opponent.gameboard.grid[rowIndex][cellIndex] === 'miss'
-        ) {
-          alert('choose another');
-        } else {
-          player.takeTurn(opponent, rowIndex, cellIndex);
-
-          if (opponent.gameboard.grid[rowIndex][cellIndex] === 'hit') {
-            gridSquare.classList.add('hit');
-          } else if (opponent.gameboard.grid[rowIndex][cellIndex] === 'miss') {
-            gridSquare.classList.add('miss');
+            opponent.takeTurn(player, 0, 0);
+            updatePlayerGameboard();
           }
+        });
+      }
 
-          opponent.takeTurn(player, 0, 0);
-          updatePlayerGameboard(player);
-        }
-      });
-
-      player2Gameboard.appendChild(gridSquare);
+      container.appendChild(gridSquare);
     });
   });
 };
 
-const updatePlayerGameboard = (player) => {
+const updatePlayerGameboard = () => {
   player.gameboard.grid.forEach((row, rowIndex) => {
     row.forEach((cell, cellIndex) => {
       const gridSquare = player1Gameboard.querySelector(
@@ -67,16 +64,8 @@ const updatePlayerGameboard = (player) => {
 };
 
 const gameController = () => {
-  const player = new Player('real');
-  const opponent = new Player('computer');
-
-  const ship1 = new Ship(3);
-  const ship2 = new Ship(3);
-
-  player.gameboard.placeShip(ship1, 0, 0, 'horizontal');
-  opponent.gameboard.placeShip(ship2, 0, 0, 'vertical');
-
-  renderGrid(player, opponent);
+  renderGrid(player.gameboard, player1Gameboard);
+  renderGrid(opponent.gameboard, player2Gameboard, true);
 };
 
 export default gameController;
