@@ -11,10 +11,10 @@ let opponent;
 const startNewGame = () => {
   player = new Player('real');
   opponent = new Player('computer');
-  const ship1 = new Ship(3);
+  // const ship1 = new Ship(3);
   const ship2 = new Ship(3);
 
-  player.gameboard.placeShip(ship1, 0, 0, 'horizontal');
+  // player.gameboard.placeShip(ship1, 0, 0, 'horizontal');
   opponent.gameboard.placeShip(ship2, 0, 0, 'vertical');
 
   renderGrid(player.gameboard, player, opponent, player1Gameboard);

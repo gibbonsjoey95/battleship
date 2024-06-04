@@ -6,7 +6,8 @@ const updatePlayerGameboard = (player) => {
       );
 
       if (cell === 'hit') {
-        gridSquare.classList.add('hit');
+        gridSquare.classList.add('hit-ship');
+        gridSquare.classList.remove('ship');
       } else if (cell === 'miss') {
         gridSquare.classList.add('miss');
       }

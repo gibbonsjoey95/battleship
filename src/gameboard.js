@@ -1,5 +1,3 @@
-import Ship from './ship';
-
 class Gameboard {
   constructor() {
     this.grid = this.createGrid();
