@@ -2,6 +2,7 @@ import checkEndGame from './check-end-game';
 import handlePlayerTurn from './handle-player-turn';
 import Ship from './ship';
 import placeShip from './place-ship';
+import createGridSquare from './create-grid-square';
 
 const ships = [2, 3];
 let currentShipIndex = 0;
@@ -25,15 +26,13 @@ const renderGrid = (
   container.textContent = '';
   gameboard.grid.forEach((row, rowIndex) => {
     row.forEach((cell, cellIndex) => {
-      const gridSquare = document.createElement('div');
-      gridSquare.classList.add('grid-square');
-      gridSquare.textContent = '';
-      gridSquare.dataset.row = rowIndex;
-      gridSquare.dataset.cell = cellIndex;
+      const gridSquare = createGridSquare(
+        rowIndex,
+        cellIndex,
+        cell,
+        isOpponent,
+      );
 
-      if (isOpponent == false && cell instanceof Ship) {
-        gridSquare.classList.add('ship');
-      }
       if (!isOpponent) {
         gridSquare.addEventListener('click', () => {
           if (placingShips) {
@@ -60,11 +59,12 @@ const renderGrid = (
         });
       }
       if (isOpponent) {
-        console.log('1');
         gridSquare.addEventListener('click', () => {
           if (!placingShips) {
             handlePlayerTurn(player, opponent, rowIndex, cellIndex, gridSquare);
-            checkEndGame(player, opponent);
+            if (checkEndGame(player, opponent)) {
+              resetGame();
+            }
           } else {
             alert('Finish placing all ships');
           }

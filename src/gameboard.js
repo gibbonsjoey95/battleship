@@ -34,6 +34,10 @@ class Gameboard {
   allShipsSunk() {
     return this.ships.every((ship) => ship.isSunk());
   }
+
+  reset() {
+    this.grid = this.createGrid(this.size);
+  }
 }
 
 export default Gameboard;
