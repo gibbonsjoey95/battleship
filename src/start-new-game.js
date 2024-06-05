@@ -14,6 +14,7 @@ const startNewGame = () => {
   opponent = new Player('computer');
 
   const ship2 = new Ship(3);
+  console.log(ship2);
 
   opponent.gameboard.placeShip(ship2, 0, 0, 'vertical');
 

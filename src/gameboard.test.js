@@ -66,4 +66,75 @@ describe('Gameboard', () => {
     expect(ship2.isSunk()).toBe(true);
     expect(gameboard.allShipsSunk()).toBe(true);
   });
+
+  test('validate ship placement exist', () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+
+    expect(gameboard.validateShipPlacement(ship, 0, 0)).toBeDefined();
+  });
+
+  test('validate ship placement', () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+    const result = gameboard.validateShipPlacement(ship, 0, 0, 'horizontal');
+    const result2 = gameboard.validateShipPlacement(ship, 0, 9, 'horizontal');
+    const result3 = gameboard.validateShipPlacement(ship, 4, 4, 'horizontal');
+    const result4 = gameboard.validateShipPlacement(ship, 4, 8, 'horizontal');
+
+    expect(result).toBe(true);
+    expect(result2).toBe(false);
+    expect(result3).toBe(true);
+    expect(result4).toBe(false);
+  });
+
+  test('place ship on another ship', () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(3);
+
+    gameboard.placeShip(ship1, 4, 4, 'horizontal');
+
+    const result = gameboard.validateShipPlacement(ship2, 4, 4, 'horizontal');
+    const result2 = gameboard.validateShipPlacement(ship2, 4, 6, 'horizontal');
+    const result3 = gameboard.validateShipPlacement(ship2, 4, 7, 'horizontal');
+    const result4 = gameboard.validateShipPlacement(ship2, 5, 4, 'horizontal');
+    const result5 = gameboard.validateShipPlacement(ship2, 4, 2, 'horizontal');
+
+    expect(result).toBe(false);
+    expect(result2).toBe(false);
+    expect(result3).toBe(true);
+    expect(result4).toBe(true);
+    expect(result5).toBe(false);
+  });
+
+  test('validate vertical placement', () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(3);
+
+    gameboard.placeShip(ship1, 4, 4, 'horizontal');
+
+    const result = gameboard.validateShipPlacement(ship2, 9, 0, 'vertical');
+    const result2 = gameboard.validateShipPlacement(ship2, 9, 7, 'vertical');
+    const result3 = gameboard.validateShipPlacement(ship2, 8, 4, 'vertical');
+
+    expect(result).toBe(false);
+    expect(result2).toBe(false);
+    expect(result3).toBe(false);
+  });
+
+  test('validate vertical placement on other ships', () => {
+    const gameboard = new Gameboard();
+    const ship1 = new Ship(3);
+    const ship2 = new Ship(3);
+
+    gameboard.placeShip(ship1, 4, 4, 'horizontal');
+
+    const result = gameboard.validateShipPlacement(ship2, 4, 4, 'vertical');
+    const result2 = gameboard.validateShipPlacement(ship2, 3, 5, 'vertical');
+
+    expect(result).toBe(false);
+    expect(result2).toBe(false);
+  });
 });

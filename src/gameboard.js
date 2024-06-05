@@ -1,3 +1,5 @@
+import Ship from './ship';
+
 class Gameboard {
   constructor() {
     this.grid = this.createGrid();
@@ -37,6 +39,30 @@ class Gameboard {
 
   reset() {
     this.grid = this.createGrid(this.size);
+  }
+
+  validateShipPlacement(ship, x, y, orientation) {
+    if (orientation === 'horizontal') {
+      if (ship.length + y > this.grid[0].length) {
+        return false;
+      }
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x][y + i] !== null) {
+          return false;
+        }
+      }
+    } else if (orientation === 'vertical') {
+      if (ship.length + x > this.grid[0].length) {
+        return false;
+      }
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x + i][y] !== null) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 }
 

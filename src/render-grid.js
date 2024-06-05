@@ -36,6 +36,7 @@ const renderGrid = (
       if (!isOpponent) {
         gridSquare.addEventListener('click', () => {
           if (placingShips) {
+            console.log(rowIndex, cellIndex);
             let currentShip = new Ship(currentShipLength);
             const placed = placeShip(
               player.gameboard,

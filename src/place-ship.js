@@ -1,7 +1,5 @@
-import validateShipPlacement from './validate-ship-placement';
-
 const placeShip = (gameboard, ship, row, col, orientation) => {
-  if (validateShipPlacement(gameboard, row, col, ship.length, orientation)) {
+  if (gameboard.validateShipPlacement(ship, row, col, orientation)) {
     gameboard.placeShip(ship, row, col, orientation);
     return true;
   }
