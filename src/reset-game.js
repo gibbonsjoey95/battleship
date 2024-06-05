@@ -1,4 +1,10 @@
-const resetGame = (player, opponent, player1Gameboard, orientation) => {
+const resetGame = (
+  player,
+  opponent,
+  player1Gameboard,
+  currentShipIndex,
+  orientation,
+) => {
   currentShipIndex = 0;
   currentShipLength = ships[currentShipIndex];
   placingShips = true;
@@ -7,8 +13,30 @@ const resetGame = (player, opponent, player1Gameboard, orientation) => {
   player.gameboard.reset();
   opponent.gameboard.reset();
 
-  renderGrid(player.gameboard, player, opponent, player1Gameboard, false);
-  renderGrid(opponent.gameboard, player, opponent, player2Gameboard, true);
+  renderGrid(
+    player.gameboard,
+    player,
+    opponent,
+    player1Gameboard,
+    false,
+    ships,
+    currentShipIndex,
+    currentShipLength,
+    placingShips,
+    orientation,
+  );
+  renderGrid(
+    opponent.gameboard,
+    player,
+    opponent,
+    player2Gameboard,
+    true,
+    ships,
+    currentShipIndex,
+    currentShipLength,
+    placingShips,
+    orientation,
+  );
 };
 
 export default resetGame;

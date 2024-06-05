@@ -4,24 +4,25 @@ import Ship from './ship';
 import placeShip from './place-ship';
 import createGridSquare from './create-grid-square';
 
-const ships = [2, 3];
-let currentShipIndex = 0;
-let currentShipLength = ships[currentShipIndex];
-let placingShips = true;
-let orientation = 'horizontal';
+// const ships = [2, 3];
+// let currentShipIndex = 0;
+// let currentShipLength = ships[currentShipIndex];
+// let placingShips = true;
+// let orientation = 'horizontal';
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'r' || event.key === 'R') {
-    orientation = orientation === 'horizontal' ? 'vertical' : 'horizontalr';
-  }
-});
+// document.addEventListener('keydown', (event) => {
+//   if (event.key === 'r' || event.key === 'R') {
+//     orientation = orientation === 'horizontal' ? 'vertical' : 'horizontalr';
+//   }
+// });
 
 const renderGrid = (
   gameboard,
   player,
   opponent,
   container,
-  isOpponent = false,
+  isOpponent,
+  state,
 ) => {
   container.textContent = '';
   gameboard.grid.forEach((row, rowIndex) => {
@@ -35,23 +36,32 @@ const renderGrid = (
 
       if (!isOpponent) {
         gridSquare.addEventListener('click', () => {
-          if (placingShips) {
+          console.log(state.placingShips);
+          if (state.placingShips) {
             console.log(rowIndex, cellIndex);
-            let currentShip = new Ship(currentShipLength);
+            let currentShip = new Ship(state.currentShipLength);
             const placed = placeShip(
               player.gameboard,
               currentShip,
               rowIndex,
               cellIndex,
-              orientation,
+              state.orientation,
             );
             if (placed) {
-              renderGrid(player.gameboard, player, opponent, container, false);
-              currentShipIndex++;
-              if (currentShipIndex >= ships.length) {
-                placingShips = false;
+              renderGrid(
+                player.gameboard,
+                player,
+                opponent,
+                container,
+                false,
+                state,
+              );
+              state.currentShipIndex++;
+              if (state.currentShipIndex >= state.ships.length) {
+                console.log('csi', state.currentShipIndex);
+                state.placingShips = false;
               } else {
-                currentShipLength = ships[currentShipIndex];
+                state.currentShipLength = state.ships[state.currentShipIndex];
               }
             } else {
               alert('Invalid ship placement');
@@ -61,7 +71,7 @@ const renderGrid = (
       }
       if (isOpponent) {
         gridSquare.addEventListener('click', () => {
-          if (!placingShips) {
+          if (!state.placingShips) {
             handlePlayerTurn(player, opponent, rowIndex, cellIndex, gridSquare);
             if (checkEndGame(player, opponent)) {
               resetGame();
