@@ -39,9 +39,6 @@ const startNewGame = () => {
   player = new Player('real');
   opponent = new Player('computer');
 
-  // const ship2 = new Ship(3);
-  // console.log(ship2);
-
   playerState.currentShipIndex = 0;
   playerState.currentShipLength =
     playerState.ships[playerState.currentShipIndex];
@@ -56,8 +53,6 @@ const startNewGame = () => {
 
   player.gameboard.reset();
   opponent.gameboard.reset();
-
-  // opponent.gameboard.placeShip(ship2, 0, 0, 'vertical');
 
   renderGrid(
     player.gameboard,

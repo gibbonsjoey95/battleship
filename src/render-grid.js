@@ -38,24 +38,26 @@ const renderGrid = (
               playerState.orientation,
             );
 
-            for (let attempts = 0; attempts < 100; attempts++) {
-              randX = Math.floor(Math.random() * 10);
-              randY = Math.floor(Math.random() * 10);
-              randOrientation =
-                Math.floor(Math.random() * 10) > 5
-                  ? (opponentState.orientation = 'vertical')
-                  : (opponentState.orientation = 'horizontal');
-              placedOpponenet = placeShip(
-                opponent.gameboard,
-                opponentShip,
-                randX,
-                randY,
-                opponentState.orientation,
-              );
-              if (placedOpponenet) break;
+            if (placedPlayer) {
+              for (let attempts = 0; attempts < 100; attempts++) {
+                randX = Math.floor(Math.random() * 10);
+                randY = Math.floor(Math.random() * 10);
+                randOrientation =
+                  Math.floor(Math.random() * 10) > 5
+                    ? (opponentState.orientation = 'vertical')
+                    : (opponentState.orientation = 'horizontal');
+                placedOpponenet = placeShip(
+                  opponent.gameboard,
+                  opponentShip,
+                  randX,
+                  randY,
+                  opponentState.orientation,
+                );
+                if (placedOpponenet) break;
+              }
             }
 
-            if (placedPlayer && placedOpponenet) {
+            if (placedOpponenet) {
               // if (placedPlayer) {
               renderGrid(
                 player.gameboard,
