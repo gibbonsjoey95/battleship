@@ -9,10 +9,18 @@ const player2Gameboard = document.querySelector('#player2Gameboard');
 let player;
 let opponent;
 
-const ships = [2, 3];
+const ships = [1, 2, 3, 4, 5];
 let placingShips = true;
 
-const state = {
+const playerState = {
+  ships: ships,
+  currentShipIndex: 0,
+  currentShipLength: ships[0],
+  placingShips: placingShips,
+  orientation: 'horizontal',
+};
+
+const opponentState = {
   ships: ships,
   currentShipIndex: 0,
   currentShipLength: ships[0],
@@ -22,8 +30,8 @@ const state = {
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'r' || event.key === 'R') {
-    state.orientation =
-      state.orientation === 'horizontal' ? 'vertical' : 'horizontalr';
+    playerState.orientation =
+      playerState.orientation === 'horizontal' ? 'vertical' : 'horizontal';
   }
 });
 
@@ -31,18 +39,25 @@ const startNewGame = () => {
   player = new Player('real');
   opponent = new Player('computer');
 
-  const ship2 = new Ship(3);
+  // const ship2 = new Ship(3);
   // console.log(ship2);
 
-  state.currentShipIndex = 0;
-  state.currentShipLength = state.ships[state.currentShipIndex];
-  state.placingShips = true;
-  state.orientation = 'horizontal';
+  playerState.currentShipIndex = 0;
+  playerState.currentShipLength =
+    playerState.ships[playerState.currentShipIndex];
+  playerState.placingShips = true;
+  playerState.orientation = 'horizontal';
+
+  opponentState.currentShipIndex = 0;
+  opponentState.currentShipLength =
+    opponentState.ships[opponentState.currentShipIndex];
+  opponentState.placingShips = true;
+  opponentState.orientation = 'horizontal';
 
   player.gameboard.reset();
   opponent.gameboard.reset();
 
-  opponent.gameboard.placeShip(ship2, 0, 0, 'vertical');
+  // opponent.gameboard.placeShip(ship2, 0, 0, 'vertical');
 
   renderGrid(
     player.gameboard,
@@ -50,7 +65,8 @@ const startNewGame = () => {
     opponent,
     player1Gameboard,
     false,
-    state,
+    playerState,
+    opponentState,
   );
   renderGrid(
     opponent.gameboard,
@@ -58,7 +74,8 @@ const startNewGame = () => {
     opponent,
     player2Gameboard,
     true,
-    state,
+    playerState,
+    opponentState,
   );
 };
 
