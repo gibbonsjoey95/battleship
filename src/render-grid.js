@@ -3,6 +3,19 @@ import handlePlayerTurn from './handle-player-turn';
 import Ship from './ship';
 import placeShip from './place-ship';
 import createGridSquare from './create-grid-square';
+import highlightShipPlacement from './highlight-ship-placement';
+
+const mouseOverSquareHandler = (playerState, rowIndex, cellIndex) => {
+  if (playerState.placingShips) {
+    highlightShipPlacement(playerState, rowIndex, cellIndex, true);
+  }
+};
+
+const mouseOutSquareHandler = (playerState, rowIndex, cellIndex) => {
+  if (playerState.placingShips) {
+    highlightShipPlacement(playerState, rowIndex, cellIndex, false);
+  }
+};
 
 const renderGrid = (
   gameboard,
@@ -24,6 +37,14 @@ const renderGrid = (
       );
 
       if (!isOpponent) {
+        gridSquare.addEventListener('mouseover', () => {
+          mouseOverSquareHandler(playerState, rowIndex, cellIndex);
+        });
+
+        gridSquare.addEventListener('mouseout', () => {
+          mouseOutSquareHandler(playerState, rowIndex, cellIndex);
+        });
+
         gridSquare.addEventListener('click', () => {
           if (playerState.placingShips) {
             let playerShip = new Ship(playerState.currentShipLength);
@@ -58,7 +79,6 @@ const renderGrid = (
             }
 
             if (placedOpponenet) {
-              // if (placedPlayer) {
               renderGrid(
                 player.gameboard,
                 player,
