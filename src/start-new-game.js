@@ -22,7 +22,8 @@ const state = {
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'r' || event.key === 'R') {
-    orientation = orientation === 'horizontal' ? 'vertical' : 'horizontalr';
+    state.orientation =
+      state.orientation === 'horizontal' ? 'vertical' : 'horizontalr';
   }
 });
 
