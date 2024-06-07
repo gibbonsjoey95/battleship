@@ -4,7 +4,7 @@ const highlightShipPlacement = (
   cellIndex,
   highlight,
 ) => {
-  for (let i = 0; i < playerState.currentShipLength; i++) {
+  for (let i = 0; i < playerState.currentShip.length; i++) {
     const x =
       playerState.orientation === 'horizontal' ? rowIndex : rowIndex + i;
     const y =

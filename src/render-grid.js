@@ -47,9 +47,17 @@ const renderGrid = (
 
         gridSquare.addEventListener('click', () => {
           if (playerState.placingShips) {
-            let playerShip = new Ship(playerState.currentShipLength);
-            let opponentShip = new Ship(opponentState.currentShipLength);
+            let playerShip = new Ship(
+              playerState.currentShip.length,
+              playerState.currentShip.name,
+            );
+            let opponentShip = new Ship(
+              opponentState.currentShip.length,
+              opponentState.currentShip.name,
+            );
             let randX, randY, randOrientation, placedOpponenet;
+
+            console.log(playerShip);
 
             const placedPlayer = placeShip(
               player.gameboard,
@@ -93,13 +101,11 @@ const renderGrid = (
               if (playerState.currentShipIndex >= playerState.ships.length) {
                 playerState.placingShips = false;
               } else {
-                playerState.currentShipLength =
+                playerState.currentShip =
                   playerState.ships[playerState.currentShipIndex];
-                opponentState.currentShipLength =
+                opponentState.currentShip =
                   opponentState.ships[opponentState.currentShipIndex];
               }
-              console.log(player.gameboard);
-              console.log(opponent.gameboard);
             } else {
               alert('Invalid ship placement');
             }

@@ -9,13 +9,21 @@ const player2Gameboard = document.querySelector('#player2Gameboard');
 let player;
 let opponent;
 
-const ships = [1, 2, 3, 4, 5];
+// const ships = [1, 2, 3, 4, 5];
+const ships = [
+  { name: 'Patrol', length: 1 },
+  { name: 'Destroyer', length: 2 },
+  { name: 'Submarine', length: 3 },
+  { name: 'Battleship', length: 4 },
+  { name: 'Aircraft Carrier', length: 5 },
+];
+
 let placingShips = true;
 
 const playerState = {
   ships: ships,
   currentShipIndex: 0,
-  currentShipLength: ships[0],
+  currentShip: ships[0].length,
   placingShips: placingShips,
   orientation: 'horizontal',
 };
@@ -23,7 +31,7 @@ const playerState = {
 const opponentState = {
   ships: ships,
   currentShipIndex: 0,
-  currentShipLength: ships[0],
+  currentShip: ships[0].length,
   placingShips: placingShips,
   orientation: 'horizontal',
 };
@@ -40,13 +48,12 @@ const startNewGame = () => {
   opponent = new Player('computer');
 
   playerState.currentShipIndex = 0;
-  playerState.currentShipLength =
-    playerState.ships[playerState.currentShipIndex];
+  playerState.currentShip = playerState.ships[playerState.currentShipIndex];
   playerState.placingShips = true;
   playerState.orientation = 'horizontal';
 
   opponentState.currentShipIndex = 0;
-  opponentState.currentShipLength =
+  opponentState.currentShip =
     opponentState.ships[opponentState.currentShipIndex];
   opponentState.placingShips = true;
   opponentState.orientation = 'horizontal';
