@@ -25,6 +25,8 @@ const renderGrid = (
   isOpponent,
   playerState,
   opponentState,
+  player1ShipsRemaining,
+  player2ShipsRemaining,
 ) => {
   container.textContent = '';
   gameboard.grid.forEach((row, rowIndex) => {
@@ -95,6 +97,8 @@ const renderGrid = (
                 false,
                 playerState,
                 opponentState,
+                player1ShipsRemaining,
+                player2ShipsRemaining,
               );
               playerState.currentShipIndex++;
               opponentState.currentShipIndex++;
@@ -114,7 +118,15 @@ const renderGrid = (
       } else {
         gridSquare.addEventListener('click', () => {
           if (!playerState.placingShips) {
-            handlePlayerTurn(player, opponent, rowIndex, cellIndex, gridSquare);
+            handlePlayerTurn(
+              player,
+              opponent,
+              rowIndex,
+              cellIndex,
+              gridSquare,
+              player1ShipsRemaining,
+              player2ShipsRemaining,
+            );
             if (checkEndGame(player, opponent)) {
               resetGame();
             }

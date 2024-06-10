@@ -5,11 +5,14 @@ import resetGame from './reset-game';
 
 const player1Gameboard = document.querySelector('#player1Gameboard');
 const player2Gameboard = document.querySelector('#player2Gameboard');
+const player1ShipsRemaining = document.querySelector('#player1ShipsRemaining');
+const player2ShipsRemaining = document.querySelector('#player2ShipsRemaining');
 
 let player;
 let opponent;
+player1ShipsRemaining.textContent = `Ships Remaining: ${5}`;
+player2ShipsRemaining.textContent = `Ships Remaining: ${5}`;
 
-// const ships = [1, 2, 3, 4, 5];
 const ships = [
   { name: 'Patrol', length: 1 },
   { name: 'Destroyer', length: 2 },
@@ -58,6 +61,8 @@ const startNewGame = () => {
   opponentState.placingShips = true;
   opponentState.orientation = 'horizontal';
 
+  player1ShipsRemaining.textContent = `Ships Remaining: ${5}`;
+  player2ShipsRemaining.textContent = `Ships Remaining: ${5}`;
   player.gameboard.reset();
   opponent.gameboard.reset();
 
@@ -69,6 +74,8 @@ const startNewGame = () => {
     false,
     playerState,
     opponentState,
+    player1ShipsRemaining,
+    player2ShipsRemaining,
   );
   renderGrid(
     opponent.gameboard,
@@ -78,6 +85,8 @@ const startNewGame = () => {
     true,
     playerState,
     opponentState,
+    player1ShipsRemaining,
+    player2ShipsRemaining,
   );
 };
 
