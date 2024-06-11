@@ -59,8 +59,6 @@ const renderGrid = (
             );
             let randX, randY, randOrientation, placedOpponenet;
 
-            console.log(playerShip);
-
             const placedPlayer = placeShip(
               player.gameboard,
               playerShip,
@@ -111,7 +109,13 @@ const renderGrid = (
                   opponentState.ships[opponentState.currentShipIndex];
               }
             } else {
-              alert('Invalid ship placement');
+              const invalidShipPlacementMessage = document.querySelector(
+                '#invalidShipPlacementMessage',
+              );
+              invalidShipPlacementMessage.classList.remove('hidden');
+              setTimeout(() => {
+                invalidShipPlacementMessage.classList.add('hidden');
+              }, 2000);
             }
           }
         });
@@ -131,7 +135,13 @@ const renderGrid = (
               resetGame();
             }
           } else {
-            alert('Finish placing all ships');
+            const finishPlacingAllShipsMessage = document.querySelector(
+              '#finishPlacingAllShipsMessage',
+            );
+            finishPlacingAllShipsMessage.classList.remove('hidden');
+            setTimeout(() => {
+              finishPlacingAllShipsMessage.classList.add('hidden');
+            }, 2000);
           }
         });
       }
