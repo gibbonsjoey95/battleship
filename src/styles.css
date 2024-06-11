@@ -17,21 +17,21 @@ body {
 }
 
 .player-names {
-  width: 600px;
+  width: 700px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .gameboards {
-  width: 750px;
+  width: 700px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
 .gameboard-container {
-  width: 300px;
+  width: auto;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 1px;
