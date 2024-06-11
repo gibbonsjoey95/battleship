@@ -13,7 +13,13 @@ const handlePlayerTurn = (
 ) => {
   const square = opponent.gameboard.grid[rowIndex][cellIndex];
   if (square === 'hit' || square === 'miss') {
-    alert('choose another square');
+    const makeAnotherAttackMessage = document.querySelector(
+      '#makeAnotherAttackMessage',
+    );
+    makeAnotherAttackMessage.classList.remove('hidden');
+    setTimeout(() => {
+      makeAnotherAttackMessage.classList.add('hidden');
+    }, 2000);
   } else {
     player.takeTurn(opponent, rowIndex, cellIndex);
     const updatedSquare = opponent.gameboard.grid[rowIndex][cellIndex];
